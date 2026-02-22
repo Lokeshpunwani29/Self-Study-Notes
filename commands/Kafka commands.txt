@@ -1,0 +1,19 @@
+🔹 Step 2: Start Zookeeper
+cd C:\kafka
+bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+
+🔹 Step 3: Start Kafka Broker
+bin\windows\kafka-server-start.bat config\server.properties
+
+🔹 Step 4: Create Topic
+bin\windows\kafka-topics.bat --create ^
+ --topic credit-status-events ^
+ --bootstrap-server localhost:9092 ^
+ --partitions 3 ^
+ --replication-factor 1
+
+🔹 Step 5: Consume Messages
+bin\windows\kafka-console-consumer.bat ^
+ --topic credit-status-events ^
+ --bootstrap-server localhost:9092 ^
+ --from-beginning

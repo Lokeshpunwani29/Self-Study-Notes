@@ -1,0 +1,21 @@
+Access key
+AKIATUVUMMM6MP6HCJXQ
+
+Secret access key
+T8psslp5646ivVjufZDH4POAIBu0SjhnBhTkX63l
+
+backend
+250560144188.dkr.ecr.ap-south-1.amazonaws.com/backend
+
+frontend
+250560144188.dkr.ecr.ap-south-1.amazonaws.com/frontend
+
+## Jenkins
+
+aws-ecr-creds  (IAM USER ECR)
+
+ec2-ssh		(EC2 Instance)
+
+GitHub access token
+
+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

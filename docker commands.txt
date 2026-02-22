@@ -1,0 +1,128 @@
+For production Change DB local host to mongo
+
+spring.data.mongodb.uri=mongodb://mongo:27017/capitaledge
+
+PART 2: FRONTEND – ANGULAR (PRODUCTION + NGINX)
+3️⃣ Change Angular API URL (VERY IMPORTANT)
+
+❌ Current (wrong for Docker & EC2):
+
+private BASE_URL = 'http://localhost:8080/api/admin/users';
+
+
+✅ Correct (works locally + EC2):
+
+private BASE_URL = '/api/admin/users';
+
+ng build --configuration production
+
+
+
+CAPSTONE-DEPLOY/
+├── docker-compose.yml
+├── backend/
+│   ├── Dockerfile
+│   └── target/app.jar
+├── frontend/
+│   ├── Dockerfile
+│   ├── nginx.conf
+│   └── dist/CapitalEdgeUI/browser
+
+docker-compose up --build
+
+chmod 400 yourkey.pem
+chmod 400 lokeshpunwani.pem
+ssh -i yourkey.pem ubuntu@EC2_PUBLIC_IP
+
+ssh -i lokeshpunwani.pem ubuntu@EC2_PUBLIC_IP
+
+sudo apt update
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker ubuntu
+exit
+
+ssh -i yourkey.pem ubuntu@EC2_PUBLIC_IP
+sudo apt install docker-compose -y
+
+scp -i yourkey.pem -r project-root ubuntu@EC2_PUBLIC_IP:/home/ubuntu/
+scp -i lokeshpunwani.pem -r aws ubuntu@54.87.221.199:/home/ubuntu/
+
+cd project-root
+docker-compose up --build -d
+
+docker info
+
+docker-compose down
+docker-compose down -v
+docker system prune -f
+docker system prune -f -a
+docker-compose up --build
+docker-compose up --build -d
+
+docker start $(docker ps -aq)
+
+
+docker ps
+docker ps -a
+docker ps -a
+docker images
+docker volume ls
+ls
+
+docker-compose logs
+docker-compose logs frontend
+docker-compose logs backend
+docker-compose logs mongo
+
+
+rm -rf CAPSTONE-DEPLOY
+
+
+docker-compose down
+docker system prune -a -f
+docker-compose up --build --no-cache
+
+docker volume rm capstone-deploy_mongo_data
+
+
+docker volume ls
+docker exec -it mongo mongosh
+
+show dbs
+use capital-edge
+show collections
+db.users.find()
+
+docker-compose logs backend
+
+cd CAPSTONE-DEPLOY
+docker-compose up --build -d
+
+OPTIONAL BUT RECOMMENDED (FREE)
+Auto-start containers on reboot
+
+Create systemd service or use:
+
+docker update --restart unless-stopped mongo backend frontend
+
+docker update --restart unless-stopped mongo backend frontend zookeeper kafka
+
+HOW TO USE .pem ON WINDOWS
+Option 1 (Recommended): Git Bash / WSL
+chmod 400 capital-edge.pem
+ssh -i capital-edge.pem ubuntu@<EC2_PUBLIC_IP>
+
+| Command             | Purpose            |
+| ------------------- | ------------------ |
+| docker ps           | Running containers |
+| docker ps -a        | All containers     |
+| docker-compose ps   | Compose services   |
+| docker-compose logs | View logs          |
+| docker-compose down | Stop everything    |
+
+
+config.setAllowedOriginPatterns(List.of("http://*"));
+config.setAllowCredentials(true);
+
